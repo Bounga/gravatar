@@ -1,0 +1,72 @@
+-*-markdown-*-
+
+Gravatar
+========
+
+Gravatar is a Javascript script to retrieve email associated gravatar picture or profile. Profile JSON must be built on server side. It requires MooTools >= 1.2.
+
+Features
+--------
+
+Gravatar features are:
+
+* Dead simple to use
+* Uses local or remote data
+* Creates multiple instances
+* Fully customizable
+* Works on Safari, Firefox, IE 6/7, Chrome and Opera
+* Documentation generated with PDoc
+* Open source, full code is available on BitBucket
+
+Download
+--------
+
+* Full code is available from [BitBucket](http://www.bitbucket.org/Bounga/gravatar). If you want to fix bugs or add features, it's the best way to start with
+* Full code is also available from a [zip file](http://www.bitbucket.org/Bounga/gravatar/get/tip.zip)
+
+When the sources are retrieved you can build a compressed version of the lib using :
+
+    $ rake
+    
+It'll build a YUI compressed version of the lib in 'dist' directory. You'll also got HTML code documentation in 'doc' directory.
+
+Usage Example
+-------------
+
+Drop **mootools**, **md5** and **gravatr.js** in your javascripts directory and include it in your XHTML layout :
+
+    <script src="javascripts/mootools.js" type="text/javascript" charset="utf-8"></script>
+    <script src="javascripts/md5.js" type="text/javascript" charset="utf-8"></script>
+    <script src="javascripts/gravatar.js" type="text/javascript" charset="utf-8"></script>
+  
+then you can create new Gravatar instances :
+
+    new Bounga.Gravatar("nico@bounga.org", {size: 200, extension: '.png', profileURL: '/gravatar_profile/'});
+  
+Take a look at 'example' directory to see examples.
+  
+Options
+-------
+
+Available options to tune your Gravatar are:
+
+    url: null       // URL used to retrieve a tooltip text based on an associated tooltip title attribute using AJAX.
+                    // When using local data, title attribute is used for tooltip title and href attribute is used for
+                    // tooltip content. You can use a rel attribute to overwrite this content.
+    showDelay: 100  // Delay to apply before showing the tooltip
+    hideDelay: 100  // Delay to apply before hiding the tooltip
+    className: null // CSS class for tooltip container
+    offsets: { x : 16, y : 16 } // The distance between your tooltip and the mouse
+    fixed: false    // If set to true, the toolTip will not follow the mouse
+    onShow: null    // Function which is fired when the tooltip is shown
+    onHide: null    // Function which is fired when the tooltip is being hidden
+
+Other
+-----
+
+For more information see [Project homepage](http://www.bitbucket.org/Bounga/gravatar/)
+
+Problems, comments, and suggestions are welcome on the [ticket system](http://www.bitbucket.org/Bounga/gravatar/issues/new/)
+
+
+Copyright (c) 2011 Nicolas Cavigneaux, released under the MIT license

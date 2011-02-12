@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Bounga's MooTools Gravatar demo</title>
+    <script src="../lib/mootools.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../lib/md5.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../src/gravatar.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+      window.addEvent('domready', function() {
+        g = new Bounga.Gravatar("nico@bounga.org", {size: 200, extension: '.png', profileURL: './'});
+        g.addEvent('profileFetched', function() { $('name').appendText(g.profile.entry[0].preferredUsername) });
+        $('email').appendText(g.email);
+        $('url').appendText(g.url);
+        $('gravatar').grab(g.to_img);
+      });
+    </script>
+  </head>
+  <body>
+    This Gravatar is loaded using JS
+    <p id="name">
+      Prefered user name loaded from Gravatar profile: 
+    </p>
+    <p id="email">
+      email: 
+    </p>
+    <p id="url">
+      Avatar image URL:
+    </p>
+    <p id="gravatar"></p>
+  </body>
+</html>
