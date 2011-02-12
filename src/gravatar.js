@@ -75,11 +75,6 @@ if (typeof Bounga == 'undefined') {
 *         </ul>
 *     </td>
 *    </tr>
-*    <tr>
-*      <td>profileURL</td>
-*      <td>null</td>
-*      <td>URL (on the same server due to browsers restriction to prevent security issues) of JSON profile. It will automatically add md5 email hash and json extension.</td>
-*    </tr>
 *  </table>  
 *
 * Events are:
@@ -107,7 +102,7 @@ if (typeof Bounga == 'undefined') {
 * If you want to change default settings all you need to do is pass an ‘options’ object:
 *
 * <pre>
-* g = new Bounga.Gravatar("nico@bounga.org", {size: 200, extension: '.png', profileURL: '/gravatar_profile/'});
+* g = new Bounga.Gravatar("nico@bounga.org", {size: 200, extension: '.png',});
 * g.addEvent('profileFetched', function() { $('name').appendText(g.profile.entry[0].preferredUsername) });
 * $('email').appendText(g.email);
 * $('url').appendText(g.url)
@@ -171,7 +166,7 @@ Bounga.Gravatar = new Class({
 	_fetchProfile: function() {
 	  if (this.options.profileURL != null) {
   	  new Request.JSON({
-  		  url: this.options.profileURL + this.md5 + ".json",
+  		  url: 'http://www.gravatar.com/' + this.md5 + ".json",
 		  
   			onSuccess: function(profile) {
           this.profile = profile;

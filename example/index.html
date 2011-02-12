@@ -8,7 +8,7 @@
     <script src="../src/gravatar.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
       window.addEvent('domready', function() {
-        g = new Bounga.Gravatar("nico@bounga.org", {size: 200, extension: '.png', profileURL: './'});
+        g = new Bounga.Gravatar("nico@bounga.org", {size: 200, extension: '.png'});
         g.addEvent('profileFetched', function() { $('name').appendText(g.profile.entry[0].preferredUsername) });
         $('email').appendText(g.email);
         $('url').appendText(g.url);
