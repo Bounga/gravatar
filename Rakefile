@@ -40,9 +40,9 @@ desc "Alias for build"
 task :dist => :build
 
 DIST_DIRECTORY      = 'dist'
-DIST_FILES          = %w(tooltips.js)
-DIST_OUTPUT         = File.join(DIST_DIRECTORY, 'tooltips.js')
-PACKED_DIST_OUTPUT  = File.join(DIST_DIRECTORY, 'tooltips_packed.js')
+DIST_FILES          = %w(gravatar.js)
+DIST_OUTPUT         = File.join(DIST_DIRECTORY, 'gravatar.js')
+PACKED_DIST_OUTPUT  = File.join(DIST_DIRECTORY, 'gravatar_packed.js')
 
 YUI_COMPRESSOR      = 'java -jar lib/yuicompressor/yuicompressor-2.3.5.jar'
 

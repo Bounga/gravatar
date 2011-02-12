@@ -1,0 +1,12 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    bluecloth (2.0.11)
+    rake (0.8.7)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bluecloth
+  rake

@@ -11,7 +11,6 @@ Features
 Gravatar features are:
 
 * Dead simple to use
-* Uses local or remote data
 * Creates multiple instances
 * Fully customizable
 * Works on Safari, Firefox, IE 6/7, Chrome and Opera
@@ -33,7 +32,7 @@ It'll build a YUI compressed version of the lib in 'dist' directory. You'll also
 Usage Example
 -------------
 
-Drop **mootools**, **md5** and **gravatr.js** in your javascripts directory and include it in your XHTML layout :
+Drop **mootools**, **md5** and **gravatar.js** in your javascripts directory and include it in your XHTML layout :
 
     <script src="javascripts/mootools.js" type="text/javascript" charset="utf-8"></script>
     <script src="javascripts/md5.js" type="text/javascript" charset="utf-8"></script>
@@ -41,7 +40,7 @@ Drop **mootools**, **md5** and **gravatr.js** in your javascripts directory and 
   
 then you can create new Gravatar instances :
 
-    new Bounga.Gravatar("nico@bounga.org", {size: 200, extension: '.png', profileURL: '/gravatar_profile/'});
+    new Bounga.Gravatar("nico@bounga.org", {size: 200, extension: '.png'});
   
 Take a look at 'example' directory to see examples.
   
@@ -50,16 +49,18 @@ Options
 
 Available options to tune your Gravatar are:
 
-    url: null       // URL used to retrieve a tooltip text based on an associated tooltip title attribute using AJAX.
-                    // When using local data, title attribute is used for tooltip title and href attribute is used for
-                    // tooltip content. You can use a rel attribute to overwrite this content.
-    showDelay: 100  // Delay to apply before showing the tooltip
-    hideDelay: 100  // Delay to apply before hiding the tooltip
-    className: null // CSS class for tooltip container
-    offsets: { x : 16, y : 16 } // The distance between your tooltip and the mouse
-    fixed: false    // If set to true, the toolTip will not follow the mouse
-    onShow: null    // Function which is fired when the tooltip is shown
-    onHide: null    // Function which is fired when the tooltip is being hidden
+    size: 100           // Default size you want to use for the picture.
+		extension: '.jpg'   // Extension you want to use for the picture.
+		rating: 'g'         // Rating level.
+		defaultImage: null  // Default image to use
+
+Events
+------
+
+Available events fired by Gravatar are:
+  
+    profileFetched        // Fired when profil JSON was successfully retrieved.
+    profileFetchingFailed // Fired when profil JSON fetching failed.
 
 Other
 -----
