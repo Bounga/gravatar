@@ -3,7 +3,7 @@
 Gravatar
 ========
 
-Gravatar is a Javascript script to retrieve email associated gravatar picture or profile. Profile JSON must be built on server side. It requires MooTools >= 1.2.
+Gravatar is a Javascript script to retrieve email associated gravatar picture or profile. It requires MooTools >= 1.2.
 
 Features
 --------
