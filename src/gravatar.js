@@ -6,118 +6,63 @@
 
 // Ensure MooTools and Tips are loaded
 if (typeof MooTools == 'undefined') { throw 'MooTools must be loaded in order to use Gravatar!'}
-if (typeof Bounga.MD5 == 'undefined') { throw 'Bounga.MD5 must be loaded in order to use Gravatar!'}
 
 /**
-*  == base ==
-*  The main section
-**/
-
-/** section: base
 * Bounga
 *  
+* Bounga's Namespace
 **/
 if (typeof Bounga == 'undefined') {
 	Bounga = {};
 }
 
-/** section: base
+/**
 * class Bounga.Gravatar
-* 
-* Class to fetch gravatar picture and profile info from an email.
-* 
-* First parameter is the email string
-* 
-* Options are:
-* <table class='options'>
-* <tr>
-* <th>Name</th>
-* <th>Default value</th>
-* <th>Description</th>
-* </tr>
-* <tr>
-* <td>size</td>
-* <td>100</td>
-* <td>Default size you want to use for the picture.</td>
-* </tr>
-* <tr>
-* <td>extension</td>
-* <td>'.jpg'</td>
-* <td>Extension you want to use for the picture.</td>
-* </tr>
-* <tr>
-* <td>rating</td>
-* <td>'g'</td>
-* <td>
-* Gravatar allows users to self-rate their images so that they can indicate if an image is appropriate for a certain audience.
-* By default, only 'G' rated images are displayed. Available rating levels are:
-* <ul>
-* <li><strong>g</strong>: suitable for display on all websites with any audience type.</li>
-* <li><strong>pg</strong>: may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence.</li>
-* <li><strong>r</strong>: may contain such things as harsh profanity, intense violence, nudity, or hard drug use.</li>
-* <li><strong>x</strong>: may contain hardcore sexual imagery or extremely disturbing violence.</li>
-* </ul>
-* </td>
-* </tr>
-* <tr>
-* <td>defaultImage</td>
-* <td>null</td>
-* <td>
-* <p>By default, if there is no image associated with the requested email hash it gives you back Gravatar default one. If you'd prefer to use your own default image, then you can easily do so by supplying the URL to an image.</p>
-* <p>In addition to allowing you to use your own image, Gravatar has a number of built in options which you can also use as defaults. Most of these work by taking the requested email hash and using it to generate a themed image that is unique to that email address. To use these options, just pass one of the following keywords as the parameter to an image request:</p>
-* <ul>
-* <li><strong>404</strong>: do not load any image if none is associated with the email hash, instead return an HTTP 404 (File Not Found) response</li>
-* <li><strong>mm</strong>: (mystery-man) a simple, cartoon-style silhouetted outline of a person (does not vary by email hash)</li>
-* <li><strong>identicon</strong>: a geometric pattern based on an email hash</li>
-* <li><strong>monsterid</strong>: a generated 'monster' with different colors, faces, etc</li>
-* <li><strong>wavatar</strong>: generated faces with differing features and backgrounds</li>
-* <li><strong>retro</strong>: awesome generated, 8-bit arcade-style pixelated faces</li>
-* </ul>
-* </td>
-* </tr>
-* </table>  
 *
-* Events are:
-* <table class='events'>
-* <tr>
-*  <th>Name</th>
-*  <th>Description</th>
-* </tr>
-* <tr>
-*   <td>profileFetched</td>
-*   <td>Fired when profil JSON was successfully retrieved.</td>
-* </tr>
-* <tr>
-*   <td>profileFetchingFailed</td>
-*   <td>Fired when profil JSON fetching failed.</td>
-* </tr>
-* </table>
+* new Bounga.Gravatar(options)
+*
+* - options (Hash): set email (or MD5) and override default options
+*  
+* Instanciate a new Bounga.Gravatar to fetch gravatar image
+* and profile info from the md5 or the email.
+* 
+* You must at least specify md5 or email option.
+* If clear email is used you have to load Bounga.MD5 for MD5 hash generation.
+* 
+* **Options**
+*
+* Name         | Default value | Description
+* -------------|:-------------:|------------
+* size         | 100           | Default size you want to use for the image
+* extension    | '.jpg'        | Extension you want to use for the image
+* rating       | 'g'           | Gravatar allows users to self-rate their images so that they can indicate if an image is appropriate for a certain audience. By default, only 'G' rated images are displayed. Available rating levels are: **g** (any audience type), **pg** (may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence), **r** (may contain such things as harsh profanity, intense violence, nudity, or hard drug use), **x** (may contain hardcore sexual imagery or extremely disturbing violence)
+* defaultImage | null          | By default, if there is no image associated with the requested email hash it gives you back Gravatar default one. If you'd prefer to use your own default image, then you can easily do so by supplying the URL to an image. In addition to allowing you to use your own image, Gravatar has a number of built in options which you can also use as defaults. Most of these work by taking the requested email hash and using it to generate a themed image that is unique to that email address. To use these options, just pass one of the following keywords as the parameter to an image request: **404** (do not load any image if none is associated with the email hash, instead return an HTTP 404 (File Not Found) response), **mm** ((mystery-man) a simple, cartoon-style silhouetted outline of a person (does not vary by email hash)), **identicon** (a geometric pattern based on an email hash), **monsterid** (a generated 'monster' with different colors, faces, etc), **retro** (awesome generated, 8-bit arcade-style pixelated faces)
+* email        | null          | User clear email (not recommended)
+* md5          | null          | User email MD5 hash
+*
+* **Events**
+*
+* Name                  | Description
+* ----------------------|------------
+* profileFetched        | Fired when profil JSON was successfully retrieved
+* profileFetchingFailed | Fired when profil JSON fetching failed
 *
 * Usage examples :
 *
-* <pre>
-* new Bounga.Gravatar('nico@bounga.org');
-* </pre>
+*     new Bounga.Gravatar({email: 'nico@bounga.org'});
+*     new Bounga.Gravatar({md5: '855c677aca7319a44da19fb583b9f320'});
 *
 * If you want to change default settings all you need to do is pass an ‘options’ object:
 *
-* <pre>
-* g = new Bounga.Gravatar("nico@bounga.org", {size: 200, extension: '.png'});
-* g.addEvent('profileFetched', function() { $('name').appendText(g.profile.entry[0].preferredUsername) });
-* $('email').appendText(g.email);
-* $('url').appendText(g.url)
-* $('gravatar').grab(g.to_img);
-* </pre>
+*     lang:javascript
+*     g = new Bounga.Gravatar("nico@bounga.org", {size: 200, extension: '.png'});
+*     g.addEvent('profileFetched', function() {
+*       $('name').appendText(g.profile.entry[0].preferredUsername);
+*     });
+*     $('email').appendText(g.email);
+*     $('url').appendText(g.url)
+*     $('gravatar').grab(g.to_img);
 *
-**/
-
-/** section: base
-*  Bounga.Gravatar(email[, options]) -> Gravatar
-*  - email (string): Email address you want to get gravatar for.
-*  - options (Hash): override default options
-*  
-*  Instanciate a new Bounga.Gravatar
-*  
 **/
 Bounga.Gravatar = new Class({
 
@@ -127,15 +72,23 @@ Bounga.Gravatar = new Class({
 		size: 100,
 		extension: '.jpg',
 		rating: 'g',
-		defaultImage: null
+		defaultImage: null,
+		email: null,
+		md5: null
 	},
 	
-	initialize: function(email, options) {
+	initialize: function(options) {
 		this.setOptions(options);
 		
-		// Create MD5 hash for given email
-    this.email = email.trim();
-    this.md5 = this.email.toMD5();
+		if (this.options.md5 != null) {
+		  this.md5 = this.options.md5
+		}
+		else {
+		  if (typeof Bounga.MD5 == 'undefined') { throw 'Bounga.MD5 must be loaded in order to use Gravatar with clear email!'}
+		  // Create MD5 hash for given email
+      this.email = this.options.email.trim();
+      this.md5 = this.email.toMD5();
+		}
     
     // Generate custom URL for email gravatar image
     var url_elts = ["http://www.gravatar.com/avatar/", this.md5, this.options.extension, "?s=", this.options.size, "&r=", this.options.rating];
@@ -154,7 +107,7 @@ Bounga.Gravatar = new Class({
     return this;
 	},
 	
-	/** section: base
+	/**
 	*  Bounga.Gravatar#_fetchProfile -> null
 	*  
 	*  Get request on Gravatar API to fetch profile info.

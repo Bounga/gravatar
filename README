@@ -11,6 +11,8 @@ Features
 Gravatar features are:
 
 * Dead simple to use
+* Use user email MD5 for privacy
+* Can use plain clear email if you don't care about privacy
 * Creates multiple instances
 * Fully customizable
 * Works on Safari, Firefox, IE 6/7, Chrome and Opera
@@ -40,7 +42,9 @@ Drop **mootools**, **md5** and **gravatar.js** in your javascripts directory and
   
 then you can create new Gravatar instances :
 
-    new Bounga.Gravatar("nico@bounga.org", {size: 200, extension: '.png'});
+    new Bounga.Gravatar({md5: "855c677aca7319a44da19fb583b9f320", size: 200, extension: '.png'});
+or 
+    new Bounga.Gravatar({email: "nico@bounga.org", size: 200, extension: '.png'});
   
 Take a look at 'example' directory to see examples.
   
@@ -53,6 +57,8 @@ Available options to tune your Gravatar are:
 		extension: '.jpg'   // Extension you want to use for the picture.
 		rating: 'g'         // Rating level.
 		defaultImage: null  // Default image to use
+		email: null         // plain text email to use
+		md5: null           // already MD5 hashed email (so much better for your users)
 
 Events
 ------
@@ -70,4 +76,4 @@ For more information see [Project homepage](http://www.bitbucket.org/Bounga/grav
 Problems, comments, and suggestions are welcome on the [ticket system](http://www.bitbucket.org/Bounga/gravatar/issues/new/)
 
 
-Copyright (c) 2011 Nicolas Cavigneaux, released under the MIT license
+Copyright (c) 2011 Nicolas Cavigneaux, released under the [MIT license](http://creativecommons.org/licenses/MIT/)

@@ -4,29 +4,21 @@ require 'rake/rdoctask'
 
 desc "Generates documentation"
 task :doc => :dist do
-  require 'lib/pdoc/pdoc'
-  require 'fileutils'
-  require 'tempfile'
+  require 'pdoc'
   
-  output_directory    = 'doc'
-  templates_directory = File.join('lib', 'pdoc_templates')
-  javascript_files    = File.join('src', '**', '*.js')
-  
-  FileUtils.rm_rf(output_directory)
-  FileUtils.mkdir_p(output_directory)
-  
-  temp = Tempfile.new('fx_doc')
-  Dir.glob(javascript_files).each do |f|
-    temp << "\n" << File.read(f)
-  end
-  temp.rewind
-  
-  FileUtils.cp(DIST_OUTPUT, File.join(templates_directory, 'html', 'assets', 'javascripts'))
-  FileUtils.cp(PACKED_DIST_OUTPUT, File.join(templates_directory, 'html', 'assets', 'javascripts'))
-  
-  ROOT_DIR = ENV['ROOT_DIR'] || FileUtils.pwd
-  PDoc::Runner.new(temp.path, :output => output_directory, :templates => templates_directory).run
-  temp.close
+  PDoc.run({
+    :source_files => Dir.glob(File.join("src", "**", "*.js")),
+    :destination => 'doc',
+    :syntax_highlighter => :pygments,
+    :markdown_parser => :maruku,
+    :pretty_urls => false,
+    :bust_cache => true,
+    :name => "Bounga's Gravatar lib",
+    :short_name => 'Gravatar',
+    :home_url => 'http://bitbucket.org/Bounga/gravatar/',
+    :version => "0.1.0",
+    :copyright_notice => 'This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/MIT/">MIT License</a>.' 
+  })
 end
 
 desc "Alias for doc"
